@@ -1,0 +1,9 @@
+.auth__error {
+    margin-top: 5px;
+    font-size: 12px;
+    line-height: 12px;
+    min-height: 2em;
+    color: var(--color-error);
+    visibility: hidden;
+  }
+  

@@ -1,0 +1,10 @@
+.popup__sign {
+  display: block;
+  margin: 23px auto 32px auto;
+}
+
+@media screen and (max-width: 620px) {
+  .popup__sign {
+    margin: 13px auto 40px auto;
+  }
+}
