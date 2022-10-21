@@ -12,7 +12,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 module.exports.getUsers = (req, res, next) => {
   User.find({})
     .then((users) => {
-      res.send({ users });
+      res.send(users);
     })
     .catch(next);
 };
@@ -23,7 +23,7 @@ module.exports.getUserById = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь с указанным _id не найден.');
       }
-      res.send({ user });
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -48,13 +48,7 @@ module.exports.createUser = (req, res, next) => {
       password: hash,
     }))
     .then((user) => {
-      res.send({
-        _id: user._id,
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        email: user.email,
-      });
+      res.send(user);
     })
     .catch((err) => {
       if (err.code === 11000) {
@@ -80,12 +74,7 @@ module.exports.updateUser = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь с указанным _id не найден.');
       }
-      res.send({
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        _id: user._id,
-      });
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
@@ -107,12 +96,7 @@ module.exports.updateAvatar = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь с указанным _id не найден.');
       }
-      res.send({
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        _id: user._id,
-      });
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
@@ -129,7 +113,7 @@ module.exports.getUserMe = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь не найден.');
       }
-      res.send({ user });
+      res.send(user);
     })
     .catch(next);
 };

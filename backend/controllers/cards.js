@@ -8,7 +8,7 @@ module.exports.getCards = (req, res, next) => {
   Card.find({})
     .populate(['owner', 'likes'])
     .then((cards) => {
-      res.send({ cards });
+      res.send(cards);
     })
     .catch(next);
 };
@@ -17,7 +17,7 @@ module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
     .then((card) => {
-      res.send({ card });
+      res.send(card);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -39,13 +39,7 @@ module.exports.deleteCard = (req, res, next) => {
       }
       Card.findByIdAndDelete(req.params.cardId)
         .then(() => {
-          res.send({
-            name: card.name,
-            link: card.link,
-            owner: card.owner,
-            _id: card._id,
-            likes: card.likes,
-          });
+          res.send(card);
         })
         .catch(next);
     })
@@ -69,13 +63,7 @@ module.exports.likeCard = (req, res, next) => {
     })
     .populate(['owner', 'likes'])
     .then((card) => {
-      res.send({
-        name: card.name,
-        link: card.link,
-        owner: card.owner,
-        _id: card._id,
-        likes: card.likes,
-      });
+      res.send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -97,13 +85,7 @@ module.exports.dislikeCard = (req, res, next) => {
     })
     .populate(['owner', 'likes'])
     .then((card) => {
-      res.send({
-        name: card.name,
-        link: card.link,
-        owner: card.owner,
-        _id: card._id,
-        likes: card.likes,
-      });
+      res.send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

@@ -1,21 +1,21 @@
-import React from "react";
-import { Redirect, Route, Switch, useHistory } from "react-router-dom";
-import Header from "./Header";
-import Login from "./Login";
-import Register from "./Register";
-import Spinner from "./Spinner";
-import ProtectedRoute from "./ProtectedRoute";
-import Main from "./Main";
-import PopupWithForm from "./PopupWithForm";
-import ImagePopup from "./ImagePopup";
-import InfoTooltip from "./InfoTooltip";
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
-import Footer from "./Footer";
-import api from "../utils/Api";
-import auth from "../utils/auth";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import React from 'react';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import Header from './Header';
+import Login from './Login';
+import Register from './Register';
+import Spinner from './Spinner';
+import ProtectedRoute from './ProtectedRoute';
+import Main from './Main';
+import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
+import InfoTooltip from './InfoTooltip';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
+import Footer from './Footer';
+import api from '../utils/Api';
+import auth from '../utils/auth';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
   const history = useHistory();
@@ -27,24 +27,24 @@ function App() {
     React.useState(false);
 
   const [selectedCard, setSelectedCard] = React.useState({
-    name: "",
-    link: "",
+    name: '',
+    link: '',
   });
   const [currentUser, setCurrentUser] = React.useState();
   const [cards, setCards] = React.useState([]);
   const [visible, setVisible] = React.useState();
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [email, setEmail] = React.useState("");
+  const [email, setEmail] = React.useState('');
   const [authorization, setAuthorization] = React.useState({
     state: false,
-    text: "none",
+    text: 'none',
   });
   function handleDeleteCard(card) {
     api
       .deleteCardApi(card._id)
       .then(() => {
-        setCards((state) => state.filter((c) => (c._id === card._id ? "" : c)));
+        setCards((state) => state.filter((c) => (c._id === card._id ? '' : c)));
       })
       .catch((err) => {
         console.log(`Возникла ошибка. ${err}`);
@@ -60,7 +60,7 @@ function App() {
       .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
+          state.map((c) => (c._id === card._id ? newCard : c)),
         );
       })
       .catch((err) => {
@@ -106,16 +106,16 @@ function App() {
   React.useEffect(() => {
     // Объявляем функцию внутри useEffect, чтобы она не теряла свою ссылку при обновлении компонента.
     function closeByEscape(evt) {
-      if (evt.key === "Escape") {
+      if (evt.key === 'Escape') {
         closeAllPopups();
       }
     }
     // Как только он становится true, то навешивается обработчик, когда в false, тогда удаляется обработчик.
     if (isOpen) {
-      document.addEventListener("keydown", closeByEscape);
+      document.addEventListener('keydown', closeByEscape);
       // И не забываем удалять обработчик в clean up функции через return
       return () => {
-        document.removeEventListener("keydown", closeByEscape);
+        document.removeEventListener('keydown', closeByEscape);
       };
     }
     // А также массив зависимостей c isOpen, чтобы отслеживать изменение этого показателя открытости.
@@ -190,19 +190,20 @@ function App() {
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setIsInfoTooltipPopupOpen(false);
-    setSelectedCard({ name: "", link: "" });
+    setSelectedCard({ name: '', link: '' });
   }
 
   function onSignOut() {
-    api.signOutApi()
-    .catch((err) => {
-      console.log(`Возникла ошибка. ${err}`);
-    })
-    .finally(() => {
-      localStorage.removeItem("jwt");
-      setEmail("");
-      setIsLoggedIn(false);
-    });    
+    auth
+      .signOutApi()
+      .catch((err) => {
+        console.log(`Возникла ошибка. ${err}`);
+      })
+      .finally(() => {
+        localStorage.removeItem('jwt');
+        setEmail('');
+        setIsLoggedIn(false);
+      });
   }
 
   function handleSignUp(data) {
@@ -211,18 +212,19 @@ function App() {
       .then((res) => {
         setAuthorization({
           state: true,
-          text: "Вы успешно зарегистрировались!",
+          text: 'Вы успешно зарегистрировались!',
         });
         setIsInfoTooltipPopupOpen(true);
-        // handleSignIn(data);
+        handleSignIn(data);
         // handleTokenCheck();
-        history.push("/sign-in");
+        // history.push("/sign-in");
+        history.push('/');
       })
       .catch((err) => {
         console.log(`Возникла ошибка. ${err}`);
         setAuthorization({
           state: false,
-          text: "Что-то пошло не так! Попробуйте ещё раз.",
+          text: 'Что-то пошло не так! Попробуйте ещё раз.',
         });
         setIsInfoTooltipPopupOpen(true);
       });
@@ -233,40 +235,44 @@ function App() {
       .signInApi(data)
       .then((res) => {
         if (res.token) {
-          localStorage.setItem("jwt", res.token);
-          handleTokenCheck();
+          console.log(data);
+          localStorage.setItem('jwt', res.token);
+          // handleTokenCheck();
+          setEmail(data.email);
+          setIsLoggedIn(true);
+          history.push('/');
         }
       })
       .catch((err) => {
         console.log(`Возникла ошибка. ${err}`);
         setAuthorization({
           state: false,
-          text: "Что-то пошло не так! Попробуйте ещё раз.",
+          text: 'Что-то пошло не так! Попробуйте ещё раз.',
         });
         setIsInfoTooltipPopupOpen(true);
       });
   }
 
   function handleTokenCheck() {
-    const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem('jwt');
     if (token) {
       auth
         .authApi(token)
         .then((res) => {
-          setEmail(res.data.email);
+          setEmail(res.email);
           setIsLoggedIn(true);
-          history.push("/");
+          history.push('/');
         })
         .catch((err) => {
           console.log(`Возникла ошибка. ${err}`);
-          history.push("/sign-in");
+          history.push('/sign-in');
         });
     }
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
+      <div className='page'>
         <Header email={email} onSignOut={onSignOut} />
 
         <Switch>
@@ -275,7 +281,7 @@ function App() {
           <ProtectedRoute
             component={Main}
             exact
-            path="/"
+            path='/'
             isLoggedIn={isLoggedIn}
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
@@ -286,24 +292,24 @@ function App() {
             onCardDelete={handleDeleteCard}
           ></ProtectedRoute>
 
-          <Route path="/sign-in">
+          <Route path='/sign-in'>
             {isLoggedIn ? (
-              <Redirect to="/" />
+              <Redirect to='/' />
             ) : (
               <Login onSignIn={handleSignIn} />
             )}
           </Route>
 
-          <Route path="/sign-up">
+          <Route path='/sign-up'>
             {isLoggedIn ? (
-              <Redirect to="/" />
+              <Redirect to='/' />
             ) : (
               <Register onSignUp={handleSignUp} />
             )}
           </Route>
 
           <Route>
-            {isLoggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
+            {isLoggedIn ? <Redirect to='/' /> : <Redirect to='/sign-in' />}
           </Route>
         </Switch>
 
@@ -333,15 +339,15 @@ function App() {
             />
 
             <PopupWithForm
-              title="Вы уверены?"
-              name="deletecard"
-              buttonText="Да"
+              title='Вы уверены?'
+              name='deletecard'
+              buttonText='Да'
               onClose={closeAllPopups}
             />
 
             <ImagePopup
               card={selectedCard}
-              name="showelement"
+              name='showelement'
               onClose={closeAllPopups}
             />
           </>
