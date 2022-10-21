@@ -4,9 +4,8 @@ const allowedCors = [
   'localhost:3000',
 ];
 
-const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-
 module.exports.cors = (req, res, next) => {
+  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   // Сохраняем источник запроса в переменную origin
   const { origin } = req.headers;
   // Сохраняем тип запроса (HTTP-метод) в соответствующую переменную

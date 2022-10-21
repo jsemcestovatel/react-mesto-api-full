@@ -95,9 +95,9 @@ class Api {
 
 const API_CONFIG = {
   baseUrl: 'https://mesto-backend-jc.nomoredomains.icu',
-  credentials: 'same-origin',
+  credentials: 'include',
   headers: {
-    Accept: 'application/json',
+    'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
 };
