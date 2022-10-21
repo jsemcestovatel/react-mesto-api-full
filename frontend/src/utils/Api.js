@@ -15,25 +15,25 @@ class Api {
 
   getUserInfoApi() {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: "GET",
+      method: 'GET',
       headers: this._headers,
     }).then(this._checkResponse);
   }
 
   setUserInfoApi(data) {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: data["name"],
-        about: data["about"],
+        name: data['name'],
+        about: data['about'],
       }),
     }).then(this._checkResponse);
   }
 
   setUserAvatarApi(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify(data),
     }).then(this._checkResponse);
@@ -41,25 +41,25 @@ class Api {
 
   getCardsApi() {
     return fetch(`${this._baseUrl}/cards`, {
-      method: "GET",
+      method: 'GET',
       headers: this._headers,
     }).then(this._checkResponse);
   }
 
   addNewCardApi(data) {
     return fetch(`${this._baseUrl}/cards`, {
-      method: "POST",
+      method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: data["name"],
-        link: data["link"],
+        name: data['name'],
+        link: data['link'],
       }),
     }).then(this._checkResponse);
   }
 
   deleteCardApi(_id) {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: this._headers,
     }).then(this._checkResponse);
   }
@@ -67,12 +67,12 @@ class Api {
   changeLikeCardStatus(_id, action) {
     if (action) {
       return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: this._headers,
       }).then(this._checkResponse);
     } else {
       return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
-        method: "PUT",
+        method: 'PUT',
         headers: this._headers,
       }).then(this._checkResponse);
     }
@@ -80,24 +80,25 @@ class Api {
 
   likeCardApi(data) {
     return fetch(`${this._baseUrl}/cards/${data._cardID}/likes`, {
-      method: "PUT",
+      method: 'PUT',
       headers: this._headers,
     }).then(this._checkResponse);
   }
 
   dislikeCardApi(data) {
     return fetch(`${this._baseUrl}/cards/${data._cardID}/likes`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: this._headers,
     }).then(this._checkResponse);
   }
 }
 
 const API_CONFIG = {
-  baseUrl: "https://mesto-backend-jc.nomoredomains.icu",
-  credentials:'include',
+  baseUrl: 'https://mesto-backend-jc.nomoredomains.icu',
+  credentials: 'same-origin',
   headers: {
-    "Content-Type": "application/json",
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
   },
 };
 
