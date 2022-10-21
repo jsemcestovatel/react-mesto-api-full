@@ -94,9 +94,9 @@ class Api {
 }
 
 const API_CONFIG = {
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-44",
+  baseUrl: "https://mesto-backend-jc.nomoredomains.icu",
+  credentials:'include',
   headers: {
-    authorization: "6d5a0daf-b4f3-4dd4-ba2b-ffc867278374",
     "Content-Type": "application/json",
   },
 };

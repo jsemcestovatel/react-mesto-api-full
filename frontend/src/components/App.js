@@ -194,9 +194,15 @@ function App() {
   }
 
   function onSignOut() {
-    localStorage.removeItem("jwt");
-    setEmail("");
-    setIsLoggedIn(false);
+    api.signOutApi()
+    .catch((err) => {
+      console.log(`Возникла ошибка. ${err}`);
+    })
+    .finally(() => {
+      localStorage.removeItem("jwt");
+      setEmail("");
+      setIsLoggedIn(false);
+    });    
   }
 
   function handleSignUp(data) {

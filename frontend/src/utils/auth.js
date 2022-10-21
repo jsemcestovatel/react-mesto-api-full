@@ -34,6 +34,12 @@ class Auth {
         }),
       }).then(this._checkResponse);
     }
+
+    signOutApi() {
+      return fetch(`${this._baseUrl}/signout`, {
+        method: "GET",
+      }).then(this._checkResponse);
+    }
   
     authApi(token) {
       return fetch(`${this._baseUrl}/users/me`, {
@@ -48,7 +54,8 @@ class Auth {
   }
   
   const API_CONFIG = {
-    baseUrl: "https://auth.nomoreparties.co",
+    baseUrl: "https://mesto-backend-jc.nomoredomains.icu",
+    credentials:'include',
     headers: {
       "Content-Type": "application/json",
     },
