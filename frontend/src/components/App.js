@@ -215,6 +215,7 @@ function App() {
           text: 'Вы успешно зарегистрировались!',
         });
         setIsInfoTooltipPopupOpen(true);
+        console.log(12);
         handleSignIn(data);
         // handleTokenCheck();
         // history.push("/sign-in");
