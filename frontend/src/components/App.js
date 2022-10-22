@@ -76,7 +76,7 @@ function App() {
     Promise.all([api.getUserInfoApi(), api.getCardsApi()])
     .then(([data, cards]) => {
       setCurrentUser(data);
-      setCards(cards);
+      setCards(cards.reverse());
     })
     .catch((err) => {
       console.log(`Возникла ошибка. ${err}`);
@@ -91,7 +91,7 @@ function App() {
       Promise.all([api.getUserInfoApi(), api.getCardsApi()])
         .then(([data, cards]) => {
           setCurrentUser(data);
-          setCards(cards);
+          setCards(cards.reverse());
         })
         .catch((err) => {
           console.log(`Возникла ошибка. ${err}`);
