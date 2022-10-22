@@ -72,6 +72,17 @@ function App() {
     handleTokenCheck();
   }, []);
 
+  React.useEffect(()=> {
+    Promise.all([api.getUserInfoApi(), api.getCardsApi()])
+    .then(([data, cards]) => {
+      setCurrentUser(data);
+      setCards(cards);
+    })
+    .catch((err) => {
+      console.log(`Возникла ошибка. ${err}`);
+    });
+  }, []);
+
   React.useEffect(() => {
     // показ прелоадера
     if (isLoggedIn) {
@@ -194,16 +205,10 @@ function App() {
   }
 
   function onSignOut() {
-    auth
-      .signOutApi()
-      .catch((err) => {
-        console.log(`Возникла ошибка. ${err}`);
-      })
-      .finally(() => {
-        localStorage.removeItem('jwt');
-        setEmail('');
-        setIsLoggedIn(false);
-      });
+    localStorage.removeItem('jwt');
+    setIsLoggedIn(false);
+    setEmail('');
+    history.push("/sign-in");
   }
 
   function handleSignUp(data) {

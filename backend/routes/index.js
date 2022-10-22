@@ -3,7 +3,7 @@ const routerUser = require('./users');
 const routerCard = require('./cards');
 const auth = require('../middlewares/auth');
 const NotFoundError = require('../errors/not-found-err');
-const { login, logout, createUser } = require('../controllers/users');
+const { login, createUser } = require('../controllers/users');
 const { validateUserBody, validateAuthentication } = require('../middlewares/validations');
 
 router.post(
@@ -16,11 +16,6 @@ router.post(
   '/signup',
   validateUserBody,
   createUser,
-);
-
-router.get(
-  '/signout',
-  logout,
 );
 
 router.use(auth);
