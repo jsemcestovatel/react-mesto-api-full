@@ -47,6 +47,7 @@ class Auth {
   authApi(token) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
+
       credentials: 'include',
       headers: {
         'Accept': 'application/json',

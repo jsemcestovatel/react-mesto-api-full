@@ -11,8 +11,6 @@ module.exports = (req, res, next) => {
     throw new NotAuthorizedError('Необходима авторизация');
   }
   const token = authorization.replace('Bearer ', '');
-  console.log(token);
-
   // token with cookies
   // const token = req.cookies.jwt;
   // if (!token) {
