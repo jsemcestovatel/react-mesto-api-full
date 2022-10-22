@@ -1,8 +1,8 @@
 const allowedCors = [
   'https://mesto-frontend-jc.nomoredomains.icu',
   'http://mesto-frontend-jc.nomoredomains.icu',
-  'localhost:3000',
-  'localhost:3001',
+  'http://localhost:3000',
+  'http://localhost:3001',
 ];
 
 module.exports.cors = (req, res, next) => {

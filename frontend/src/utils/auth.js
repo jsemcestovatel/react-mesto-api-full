@@ -16,6 +16,7 @@ class Auth {
   signUpApi(data) {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         password: data.password,
@@ -27,6 +28,7 @@ class Auth {
   signInApi(data) {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         password: data.password,
@@ -38,12 +40,14 @@ class Auth {
   signOutApi() {
     return fetch(`${this._baseUrl}/signout`, {
       method: 'GET',
+      credentials: 'include',
     }).then(this._checkResponse);
   }
 
   authApi(token) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',

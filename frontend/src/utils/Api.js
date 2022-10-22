@@ -16,6 +16,7 @@ class Api {
   getUserInfoApi() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
+      credentials: 'include',
       headers: this._headers,
     }).then(this._checkResponse);
   }
@@ -23,6 +24,7 @@ class Api {
   setUserInfoApi(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: data['name'],
@@ -34,6 +36,7 @@ class Api {
   setUserAvatarApi(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify(data),
     }).then(this._checkResponse);
@@ -42,6 +45,7 @@ class Api {
   getCardsApi() {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
+      credentials: 'include',
       headers: this._headers,
     }).then(this._checkResponse);
   }
@@ -49,6 +53,7 @@ class Api {
   addNewCardApi(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: data['name'],
@@ -60,6 +65,7 @@ class Api {
   deleteCardApi(_id) {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: this._headers,
     }).then(this._checkResponse);
   }
@@ -68,11 +74,13 @@ class Api {
     if (action) {
       return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
         method: 'DELETE',
+        credentials: 'include',
         headers: this._headers,
       }).then(this._checkResponse);
     } else {
       return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
         method: 'PUT',
+        credentials: 'include',
         headers: this._headers,
       }).then(this._checkResponse);
     }
@@ -81,6 +89,7 @@ class Api {
   likeCardApi(data) {
     return fetch(`${this._baseUrl}/cards/${data._cardID}/likes`, {
       method: 'PUT',
+      credentials: 'include',
       headers: this._headers,
     }).then(this._checkResponse);
   }
@@ -88,6 +97,7 @@ class Api {
   dislikeCardApi(data) {
     return fetch(`${this._baseUrl}/cards/${data._cardID}/likes`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: this._headers,
     }).then(this._checkResponse);
   }
