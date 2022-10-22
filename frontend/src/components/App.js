@@ -70,7 +70,7 @@ function App() {
 
   React.useEffect(() => {
     handleTokenCheck();
-  }, []);
+  }, [history]);
 
   // React.useEffect(()=> {
   //   Promise.all([api.getUserInfoApi(), api.getCardsApi()])
