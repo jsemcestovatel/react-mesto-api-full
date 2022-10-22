@@ -141,8 +141,9 @@ module.exports.login = (req, res, next) => {
 module.exports.logout = (req, res) => {
   res
     .clearCookie('jwt', {
+      maxAge: 0,
       httpOnly: true,
-      sameSite: false,
+      sameSite: 'none',
       secure: true,
     })
     .send({ message: 'Выход' });

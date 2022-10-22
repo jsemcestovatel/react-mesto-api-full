@@ -257,9 +257,11 @@ function App() {
       auth
         .authApi(token)
         .then((res) => {
-          setEmail(res.email);
-          setIsLoggedIn(true);
-          history.push('/');
+          if (res) {
+            setEmail(res.email);
+            setIsLoggedIn(true);
+            history.push('/');
+          }
         })
         .catch((err) => {
           console.log(`Возникла ошибка. ${err}`);
