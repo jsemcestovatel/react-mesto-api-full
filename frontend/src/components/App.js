@@ -217,8 +217,7 @@ function App() {
         setIsInfoTooltipPopupOpen(true);
         handleSignIn(data);
         // handleTokenCheck();
-        // history.push("/sign-in");
-        history.push('/');
+        history.push("/sign-in");
       })
       .catch((err) => {
         console.log(`Возникла ошибка. ${err}`);
