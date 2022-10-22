@@ -4,20 +4,20 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const cors = require('cors');
+// const cors = require('cors');
 
 const routes = require('./routes/index');
 const { handlerErrors } = require('./middlewares/errors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-// const { cors } = require('./middlewares/cors');
+const { cors } = require('./middlewares/cors');
 
 const app = express();
 
-// app.use(cors);
-app.use(cors({
-  origin: 'https://mesto-frontend-jc.nomoredomains.icu',
-  credentials: true,
-}));
+app.use(cors);
+// app.use(cors({
+//   origin: 'https://mesto-frontend-jc.nomoredomains.icu',
+//   credentials: true,
+// }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
