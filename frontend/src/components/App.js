@@ -215,7 +215,6 @@ function App() {
           text: 'Вы успешно зарегистрировались!',
         });
         setIsInfoTooltipPopupOpen(true);
-        console.log(12);
         handleSignIn(data);
         // handleTokenCheck();
         // history.push("/sign-in");
@@ -236,11 +235,10 @@ function App() {
       .signInApi(data)
       .then((res) => {
         if (res.token) {
-          console.log(data);
           localStorage.setItem('jwt', res.token);
-          // handleTokenCheck();
-          setEmail(data.email);
-          setIsLoggedIn(true);
+          handleTokenCheck();
+          // setEmail(data.email);
+          // setIsLoggedIn(true);
           history.push('/');
         }
       })

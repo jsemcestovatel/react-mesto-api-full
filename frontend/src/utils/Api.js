@@ -92,6 +92,7 @@ class Api {
     }).then(this._checkResponse);
   }
 }
+const token = localStorage.getItem('jwt');
 
 const API_CONFIG = {
   baseUrl: 'https://mesto-backend-jc.nomoredomains.icu',
@@ -99,6 +100,7 @@ const API_CONFIG = {
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
   },
 };
 
