@@ -41,11 +41,7 @@ module.exports.createUser = (req, res, next) => {
   bcrypt
     .hash(password, 10)
     .then((hash) => User.create({
-      name,
-      about,
-      avatar,
-      email,
-      password: hash,
+      name, about, avatar, email, password: hash,
     }))
     .then((user) => {
       res.send(user);
@@ -123,9 +119,13 @@ module.exports.login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'testkey', {
-        expiresIn: '7d',
-      });
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'testkey',
+        {
+          expiresIn: '7d',
+        },
+      );
       res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
@@ -138,5 +138,11 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.logout = (req, res) => {
-  res.clearCookie('jwt').send({ message: 'Выход' });
+  res
+    .clearCookie('jwt', {
+      httpOnly: true,
+      sameSite: false,
+      secure: true,
+    })
+    .send({ message: 'Выход' });
 };

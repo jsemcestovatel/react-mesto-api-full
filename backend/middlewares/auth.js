@@ -1,3 +1,4 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const NotAuthorizedError = require('../errors/not-authorized-err');
 
@@ -7,9 +8,10 @@ module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    next(new NotAuthorizedError('Необходима авторизация'));
+    throw new NotAuthorizedError('Необходима авторизация');
   }
   const token = authorization.replace('Bearer ', '');
+  console.log(token);
 
   // token with cookies
   // const token = req.cookies.jwt;
