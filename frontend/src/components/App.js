@@ -72,16 +72,16 @@ function App() {
     handleTokenCheck();
   }, []);
 
-  React.useEffect(()=> {
-    Promise.all([api.getUserInfoApi(), api.getCardsApi()])
-    .then(([data, cards]) => {
-      setCurrentUser(data);
-      setCards(cards.reverse());
-    })
-    .catch((err) => {
-      console.log(`Возникла ошибка. ${err}`);
-    });
-  }, []);
+  // React.useEffect(()=> {
+  //   Promise.all([api.getUserInfoApi(), api.getCardsApi()])
+  //   .then(([data, cards]) => {
+  //     setCurrentUser(data);
+  //     setCards(cards);
+  //   })
+  //   .catch((err) => {
+  //     console.log(`Возникла ошибка. ${err}`);
+  //   });
+  // }, []);
 
   React.useEffect(() => {
     // показ прелоадера
@@ -91,7 +91,7 @@ function App() {
       Promise.all([api.getUserInfoApi(), api.getCardsApi()])
         .then(([data, cards]) => {
           setCurrentUser(data);
-          setCards(cards.reverse());
+          setCards(cards);
         })
         .catch((err) => {
           console.log(`Возникла ошибка. ${err}`);
@@ -101,7 +101,7 @@ function App() {
           setVisible(false);
         });
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, history]);
 
   // обработчик нажатия Escape
 
